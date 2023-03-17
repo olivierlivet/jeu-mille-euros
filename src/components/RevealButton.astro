@@ -7,8 +7,6 @@ const { answer } = Astro.props;
 
 <div x-data="{ open: false }">
     <button x-on:click="open = !open">Voir la réponse</button>
-    <div x-show="open">{answer}</div>
-
-    <style></style>
+    <div x-show="open" x-transition>{answer}</div>
 </div>
 <p class="text-black font-bold group-hover:text-gray">Astro</p>

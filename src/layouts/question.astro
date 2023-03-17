@@ -4,18 +4,20 @@ import RevealButton from "../components/RevealButton.astro";
 ---
 
 <html>
-    <!-- Be sure to include AlpineJS -->
-    <script src="//unpkg.com/alpinejs" defer is:inline></script>
+    <head>
+        <!-- Be sure to include AlpineJS -->
+        <script src="//unpkg.com/alpinejs" defer is:inline></script>
+    </head>
 
-    <!-- ... -->
-
-    <div class="container mx-auto max-w-lg">
-        <h1>{frontmatter.title}</h1>
-        <h2>Niveau: {frontmatter.level}</h2>
-        <p>{frontmatter.description}</p>
-        <slot />
-        <RevealButton open={false} answer={frontmatter.answer} />
-    </div>
-
-
+    <body>
+        <main>
+            <div class="container mx-auto max-w-lg">
+                <h1>{frontmatter.title}</h1>
+                <h2>Niveau: {frontmatter.level}</h2>
+                <p>{frontmatter.description}</p>
+                <slot />
+                <RevealButton open={false} answer={frontmatter.answer} />
+            </div>
+        </main>
+    </body>
 </html>
