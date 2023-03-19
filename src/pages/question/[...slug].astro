@@ -1,0 +1,64 @@
+---
+import { useStoryblokApi } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+import Nav from "../../components/nav.astro";
+
+export async function getStaticPaths() {
+    const sbApi = useStoryblokApi();
+
+    const { data } = await sbApi.get("cdn/stories", {
+        content_type: "question",
+        version: "published",
+    });
+
+    const stories = Object.values(data.stories);
+
+    console.log(stories);
+
+    return stories.map((story) => {
+        return {
+            params: { slug: story.slug },
+        };
+    });
+}
+
+const sbApi = useStoryblokApi();
+const { slug } = Astro.params;
+
+const { data } = await sbApi.get(`cdn/stories/question/${slug}`, {
+    // version: "draft",
+});
+
+const story = data.story;
+// console.log(s)
+---
+
+<!DOCTYPE html>
+<html lang="fr" class="min-h-full h-full">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+        <meta name="generator" content={Astro.generator} />
+        <meta
+            name="description"
+            content={`Je découvre Astro pour changer de Gatsby`}
+        />
+        <title>{story.title}</title>
+    </head>
+    <body class="bg-red-600 min-h-full h-full">
+        <Nav />
+        <div
+            class="container max-w-xl mx-auto text-white flex h-max min-h-full items-center"
+        >
+            <div class="">
+                <div>question</div>
+                <div>{story.content.question}</div>
+                <div>{story.content.answer}</div>
+                <!-- <StoryblokComponent blok={story.content} /> -->
+                <!-- <div>{story.content}</div> -->
+            </div>
+        </div>
+    </body>
+</html>
