@@ -60,17 +60,18 @@ console.log(story.content);
         <div>emission</div>
         <div>{story.content.title}</div>
         <div>{story.content.answer}</div>
-        <Debug data={story.content.questions} />
 
-        {
-            story.content.questions.map((item) => (
-                <QuestionCard
-                    level={item.content.level}
-                    question={item.content.question}
-                    answer={item.content.answer}
-                />
-            ))
-        }
+        <div class="flex flex-col space-y-4">
+            {
+                story.content.questions.map((item) => (
+                    <QuestionCard
+                        level={item.content.level}
+                        question={item.content.question}
+                        answer={item.content.answer}
+                    />
+                ))
+            }
+        </div>
 
         <!-- <StoryblokComponent blok={story.content} /> -->
         <!-- <div>{story.content}</div> -->
