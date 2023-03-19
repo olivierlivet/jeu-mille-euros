@@ -1,6 +1,9 @@
 ---
 import { useStoryblokApi } from "@storyblok/astro";
+import { Debug } from "astro/components";
+
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import QuestionCard from "../../components/QuestionCard.astro";
 
 export async function getStaticPaths() {
     const sbApi = useStoryblokApi();
@@ -25,21 +28,50 @@ const sbApi = useStoryblokApi();
 const { slug } = Astro.params;
 
 const { data } = await sbApi.get(`cdn/stories/emissions/${slug}`, {
+    resolve_relations: `emission.questions`,
     // version: "draft",
 });
-
 const story = data.story;
-console.log(story.content.questions);
+
+// console.log(story.content.questions);
+
+// const questions = await sbApi.get(
+//     // `cdn/stories/${story.content.questions[0]}?find_by=uuid`,
+//     `/v2/cdn/stories/d9399fd9-6264-4337-bbfb-0e65e91519a4/?find_by=uuid`,
+//     {
+//         // findBy: "uuid",
+//         // find_by: "uuid",
+//         version: "published",
+//     }
+// );
+
+console.log(story.content);
+// console.log(questions.data);
 ---
 
 <html lang="fr">
-    <head>
-        <title>{story.name}</title>
-    </head>
+    <meta charset="UTF8" />
+
+    <title>{story.name}</title>
+
+    <meta name="description" content={story.name} />
+
     <body>
         <div>emission</div>
         <div>{story.content.title}</div>
         <div>{story.content.answer}</div>
+        <Debug data={story.content.questions} />
+
+        {
+            story.content.questions.map((item) => (
+                <QuestionCard
+                    level={item.content.level}
+                    question={item.content.question}
+                    answer={item.content.answer}
+                />
+            ))
+        }
+
         <!-- <StoryblokComponent blok={story.content} /> -->
         <!-- <div>{story.content}</div> -->
     </body>
