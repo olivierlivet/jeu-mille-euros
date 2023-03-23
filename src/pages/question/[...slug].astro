@@ -50,11 +50,10 @@ const story = data.story;
     <body class="bg-red-600 min-h-full h-full">
         <Nav />
         <div
-            class="container max-w-xl mx-auto text-white flex h-max min-h-full items-center"
+            class="min-w-full mx-auto text-white flex h-max min-h-full items-center"
         >
-            <div class="p-2 sm:p-8 text-center">
-                <div>question</div>
-                <div>{story.content.question}</div>
+            <div class="p-2 sm:p-8 text-center w-full">
+                <h1 class="text-3xl">{story.content.question}</h1>
                 <div>{story.content.answer}</div>
                 <!-- <StoryblokComponent blok={story.content} /> -->
                 <!-- <div>{story.content}</div> -->
