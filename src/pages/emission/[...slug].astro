@@ -61,13 +61,15 @@ console.log(story.content);
         <div>{story.content.title}</div>
         <div>{story.content.answer}</div>
 
-        <div class="flex flex-col space-y-4">
+        <div class="flex flex-col space-y-8 items-center">
             {
                 story.content.questions.map((item) => (
+                    // <Debug data={item} />
                     <QuestionCard
                         level={item.content.level}
                         question={item.content.question}
                         answer={item.content.answer}
+                        slug={item.full_slug}
                     />
                 ))
             }

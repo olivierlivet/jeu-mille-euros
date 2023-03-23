@@ -1,21 +1,29 @@
 ---
-const { level, question, answer } = Astro.props;
+import { Debug } from "astro/components";
+
+const { level, question, answer, slug } = Astro.props;
 ---
 
 <div
     x-data="{ open: false }"
-    class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+    class="hover:translate-x-2 transition-transform border-l-8 border-l-emerald-700 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
 >
+    <!-- <Debug data={question} /> -->
     <h5
         class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
     >
-        {question}
+        <a href={`/${slug}`}>
+            {question}
+        </a>
     </h5>
-    <p x-transition :class="open ? 'blur-0' : 'blur-sm'">
-        {answer}
+    <p class="text-lg">
+        <span x-transition :class="open ? 'blur-0 bg-yellow-100' : 'blur-sm'">
+            {answer}
+        </span>
     </p>
     <button
         x-on:click="open = !open"
+        x-show="!open"
         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     >
         Réponse
