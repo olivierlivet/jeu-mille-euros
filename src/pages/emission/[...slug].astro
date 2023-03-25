@@ -4,6 +4,7 @@ import { Debug } from "astro/components";
 
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import QuestionCard from "../../components/QuestionCard.astro";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
     const sbApi = useStoryblokApi();
@@ -32,51 +33,24 @@ const { data } = await sbApi.get(`cdn/stories/emissions/${slug}`, {
     // version: "draft",
 });
 const story = data.story;
-
-// console.log(story.content.questions);
-
-// const questions = await sbApi.get(
-//     // `cdn/stories/${story.content.questions[0]}?find_by=uuid`,
-//     `/v2/cdn/stories/d9399fd9-6264-4337-bbfb-0e65e91519a4/?find_by=uuid`,
-//     {
-//         // findBy: "uuid",
-//         // find_by: "uuid",
-//         version: "published",
-//     }
-// );
-
-console.log(story.content);
-// console.log(questions.data);
 ---
 
-<html lang="fr">
-    <meta charset="UTF8" />
-    <meta name="viewport" content="width=device-width" />
+<Layout title={story.name} bgColor={`red-600`}>
+    <div>emission</div>
+    <div>{story.content.title}</div>
+    <div>{story.content.answer}</div>
 
-    <title>{story.name}</title>
-
-    <meta name="description" content={story.name} />
-
-    <body>
-        <div>emission</div>
-        <div>{story.content.title}</div>
-        <div>{story.content.answer}</div>
-
-        <div class="flex flex-col space-y-8 items-center">
-            {
-                story.content.questions.map((item) => (
-                    // <Debug data={item} />
-                    <QuestionCard
-                        level={item.content.level}
-                        question={item.content.question}
-                        answer={item.content.answer}
-                        slug={item.full_slug}
-                    />
-                ))
-            }
-        </div>
-
-        <!-- <StoryblokComponent blok={story.content} /> -->
-        <!-- <div>{story.content}</div> -->
-    </body>
-</html>
+    <div class="flex flex-col space-y-8 items-center">
+        {
+            story.content.questions.map((item) => (
+                // <Debug data={item} />
+                <QuestionCard
+                    level={item.content.level}
+                    question={item.content.question}
+                    answer={item.content.answer}
+                    slug={item.full_slug}
+                />
+            ))
+        }
+    </div>
+</Layout>

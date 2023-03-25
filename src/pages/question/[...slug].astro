@@ -3,6 +3,7 @@ import { useStoryblokApi } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
 import Nav from "../../components/nav.astro";
+import RevealButton from "../../components/RevealButton.astro";
 
 export async function getStaticPaths() {
     const sbApi = useStoryblokApi();
@@ -31,7 +32,6 @@ const { data } = await sbApi.get(`cdn/stories/question/${slug}`, {
 });
 
 const story = data.story;
-// console.log(s)
 ---
 
 <!DOCTYPE html>
@@ -53,8 +53,8 @@ const story = data.story;
             class="min-w-full mx-auto text-white flex h-max min-h-full items-center"
         >
             <div class="p-2 sm:p-8 text-center w-full">
-                <h1 class="text-3xl">{story.content.question}</h1>
-                <div>{story.content.answer}</div>
+                <h1 class="text-3xl mb-4">{story.content.question}</h1>
+                <RevealButton answer={story.content.answer} />
                 <!-- <StoryblokComponent blok={story.content} /> -->
                 <!-- <div>{story.content}</div> -->
             </div>
