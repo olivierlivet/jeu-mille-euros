@@ -7,7 +7,7 @@ import { Debug } from "astro/components";
 
 export async function getStaticPaths({ paginate }) {
     // Load your data with fetch(), Astro.glob(), etc.
-    const response = await fetch(`http://localhost:3000/emissions/`);
+    const response = await fetch(`${import.meta.env.BACKEND_URL}/emissions`);
     const result = await response.json();
     // const allPokemon = result.results;
 
@@ -21,7 +21,7 @@ export async function getStaticPaths({ paginate }) {
     // ];
 }
 
-const queryContents = await fetch(`http://localhost:3000/emissions`);
+const queryContents = await fetch(`${import.meta.env.BACKEND_URL}/emissions`);
 const data = await queryContents.json();
 ---
 
