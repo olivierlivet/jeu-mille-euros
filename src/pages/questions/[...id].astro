@@ -1,0 +1,46 @@
+---
+import Html from "../../layouts/html.astro";
+import Main from "../../layouts/main.astro";
+
+import Nav from "../../components/nav.astro";
+import RevealButton from "../../components/RevealButton.astro";
+import BackButton from "../../components/Buttons/BackButton.astro";
+import { Debug } from "astro/components";
+import QuestionCard from "../../components/QuestionCard.astro";
+
+export async function getStaticPaths() {
+    // Load your data with fetch(), Astro.glob(), etc.
+    const response = await fetch(`${import.meta.env.BACKEND_URL}/questions`);
+    const result = await response.json();
+
+    return result.map((item) => ({
+        params: {
+            id: item._id,
+        },
+    }));
+}
+
+const { id } = Astro.params;
+
+const data = await fetch(`${import.meta.env.BACKEND_URL}/questions/${id}`);
+const body = await data.json();
+---
+
+<Html
+    title={body.question}
+    description="Ce jeu populaire et familial sillone la France pour vous faire jouer avec vos connaissances de culture générale."
+>
+    <Main>
+        <!-- <h1 class="text-3xl mb-4">{body.question}</h1> -->
+        <div class="mb-4">
+            <BackButton />
+        </div>
+        <QuestionCard
+            isSingle={true}
+            question={body.question}
+            answer={body.answer}
+            level={body.level}
+            theme={body.theme}
+        />
+    </Main>
+</Html>

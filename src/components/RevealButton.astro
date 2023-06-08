@@ -5,7 +5,14 @@
 const { answer } = Astro.props;
 ---
 
-<div x-data="{ open: false }">
+<div x-data="{ open: false }" class="flex">
     <button x-show="!open" x-on:click="open = !open">Voir la réponse</button>
-    <div x-show="open" x-transition>{answer}</div>
+    <!-- <div class="bg-green-100" x-show="open" x-transition>{answer}</div> -->
+    <div
+        class="bg-green-100 text-green-700 p-1 font-medium rounded-sm underline"
+        x-show="open"
+        x-transition
+    >
+        {answer}
+    </div>
 </div>

@@ -1,0 +1,43 @@
+---
+import { useStoryblokApi } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+import Nav from "../../components/nav.astro";
+import RevealButton from "../../components/RevealButton.astro";
+import Html from "../../layouts/html.astro";
+import Layout from "../../layouts/main.astro";
+
+export async function getStaticPaths() {
+    const storyblokApi = useStoryblokApi();
+
+    const { data } = await storyblokApi.get("cdn/tags");
+    let routes = data.tags.map((item) => {
+        return { params: { slug: item.name } };
+    });
+
+    return routes;
+}
+
+const { slug } = Astro.params;
+console.log("slug", slug);
+// const { data } = await sbApi.get(`cdn/stories/question/${slug}`, {
+//     // version: "draft",
+// });
+
+// const story = data.story;
+---
+
+<Html>
+    <Layout>
+        <Nav />
+        <div
+            class="min-w-full mx-auto text-white flex h-max min-h-full items-center"
+        >
+            <div class="p-2 sm:p-8 text-center w-full">
+                test
+                <!-- <StoryblokComponent blok={story.content} /> -->
+                <!-- <div>{story.content}</div> -->
+            </div>
+        </div>
+    </Layout>
+</Html>

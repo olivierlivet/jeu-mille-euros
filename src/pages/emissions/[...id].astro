@@ -1,0 +1,44 @@
+---
+import { useStoryblokApi } from "@storyblok/astro";
+import { Debug } from "astro/components";
+
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import QuestionCard from "../../components/QuestionCard.astro";
+import Layout from "../../layouts/main.astro";
+import Html from "../../layouts/html.astro";
+
+export async function getStaticPaths() {
+    return [{ params: { id: "6480a2015afba9ca477cdca5" } }];
+}
+const { id } = Astro.params;
+
+const queryContents = await fetch(`http://localhost:3000/emissions/${id}`);
+const data = await queryContents.json();
+---
+
+<Html title={"test"} description={"test"}>
+    <Layout>
+        <div>emission</div>
+        <!-- <div>{story.content.title}</div>
+        <div>{story.content.answer}</div> -->
+        <Debug data={data} />
+        <div class="flex flex-col space-y-8 items-center">
+            test {id}
+            <!-- {
+                story.content.questions.map(
+                    (
+                        item
+                        // <Debug data={item} />
+                    ) => (
+                        <QuestionCard
+                            level={item.content.level}
+                            question={item.content.question}
+                            answer={item.content.answer}
+                            slug={item.full_slug}
+                        />
+                    )
+                )
+            } -->
+        </div>
+    </Layout>
+</Html>

@@ -1,42 +1,44 @@
 ---
 import { Debug } from "astro/components";
+import RevealButton from "./RevealButton.astro";
+import LevelTag from "./LevelTag.astro";
+import ThemeTag from "./ThemeTag.astro";
+import ExternalLinkIcon from "./ExternalLinkIcon.astro";
 
-const { level, question, answer, slug } = Astro.props;
+const { level, question, answer, theme, id } = Astro.props;
 ---
 
 <div
-    x-data="{ open: false }"
-    class="hover:translate-x-2 transition-transform border-l-8 border-l-emerald-700 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+    class="rounded-lg shadow"
+    class:list={[
+        {
+            "bg-white": level === 1,
+            "bg-blue-500": level === 2,
+            "bg-red-500": level === 3,
+            "bg-gray-500": level === 4,
+            "bg-gray-800": level === 5,
+        },
+    ]}
 >
-    <!-- <Debug data={question} /> -->
-    <h5
-        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+    <div
+        x-data="{ open: false }"
+        class="hover:translate-x-2 transition-transform p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
     >
-        <a href={`/${slug}`}>
-            {question}
-        </a>
-    </h5>
-    <p class="text-lg">
-        <span x-transition :class="open ? 'blur-0 bg-yellow-100' : 'blur-sm'">
-            {answer}
-        </span>
-    </p>
-    <button
-        x-on:click="open = !open"
-        x-show="!open"
-        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-    >
-        Réponse
-        <svg
-            aria-hidden="true"
-            class="w-4 h-4 ml-2 -mr-1"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-            ><path
-                fill-rule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clip-rule="evenodd"></path></svg
+        <!-- <Debug data={question} /> -->
+
+        <div class="flex justify-between mb-2">
+            <div class="grid gap-2 grid-cols-2">
+                <LevelTag level={level} />
+                {theme ? <ThemeTag theme={theme} /> : null}
+            </div>
+            <ExternalLinkIcon href={`/questions/${id}`} label={question} />
+        </div>
+        <h5
+            class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
         >
-    </button>
+            {question}
+        </h5>
+        <!-- <a href={`/questions/${id}`}>Lien</a> -->
+        <RevealButton answer={answer} />
+    </div>
 </div>

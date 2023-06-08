@@ -1,0 +1,57 @@
+---
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+import Nav from "../../components/nav.astro";
+import RevealButton from "../../components/RevealButton.astro";
+import { Debug } from "astro/components";
+
+export async function getStaticPaths({ paginate }) {
+    // Load your data with fetch(), Astro.glob(), etc.
+    const response = await fetch(`http://localhost:3000/emissions/`);
+    const result = await response.json();
+    // const allPokemon = result.results;
+
+    // Return a paginated collection of paths for all posts
+    return paginate(result, { pageSize: 1 });
+
+    // return [
+    //     { params: { id: "aaaaa" } },
+    //     { params: { id: "2" } },
+    //     { params: { id: "3" } },
+    // ];
+}
+
+const queryContents = await fetch(`http://localhost:3000/emissions`);
+const data = await queryContents.json();
+---
+
+<!DOCTYPE html>
+<html lang="fr" class="min-h-full h-full">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+        <meta name="generator" content={Astro.generator} />
+        <meta
+            name="description"
+            content={`Je découvre Astro pour changer de Gatsby`}
+        />
+        <!-- <title>{story.content.question}</title> -->
+    </head>
+    <body class="bg-red-600 min-h-full h-full">
+        <Nav />
+        <Debug data={data} />
+        <div
+            class="min-w-full mx-auto text-white flex h-max min-h-full items-center"
+        >
+            {
+                data.map(
+                    (
+                        item
+                        // <Debug data={item} />
+                    ) => <p>{item.title}</p>
+                )
+            }
+        </div>
+    </body>
+</html>
