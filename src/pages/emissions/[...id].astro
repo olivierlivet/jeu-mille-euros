@@ -12,7 +12,9 @@ export async function getStaticPaths() {
 }
 const { id } = Astro.params;
 
-const queryContents = await fetch(`http://localhost:3000/emissions/${id}`);
+const queryContents = await fetch(
+    `${import.meta.env.BACKEND_URL}/emissions/${id}`
+);
 const data = await queryContents.json();
 ---
 
