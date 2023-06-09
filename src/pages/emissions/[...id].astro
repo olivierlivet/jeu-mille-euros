@@ -1,5 +1,4 @@
 ---
-import { useStoryblokApi } from "@storyblok/astro";
 import { Debug } from "astro/components";
 
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
@@ -21,26 +20,9 @@ const data = await queryContents.json();
 <Html title={"test"} description={"test"}>
     <Layout>
         <div>emission</div>
-        <!-- <div>{story.content.title}</div>
-        <div>{story.content.answer}</div> -->
         <Debug data={data} />
         <div class="flex flex-col space-y-8 items-center">
             test {id}
-            <!-- {
-                story.content.questions.map(
-                    (
-                        item
-                        // <Debug data={item} />
-                    ) => (
-                        <QuestionCard
-                            level={item.content.level}
-                            question={item.content.question}
-                            answer={item.content.answer}
-                            slug={item.full_slug}
-                        />
-                    )
-                )
-            } -->
         </div>
     </Layout>
 </Html>

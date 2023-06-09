@@ -1,22 +1,8 @@
 ---
-import { useStoryblokApi } from "@storyblok/astro";
 import Html from "../layouts/html.astro";
 import Main from "../layouts/main.astro";
 import { Debug } from "astro/components";
 import PrimaryButton from "../components/Buttons/PrimaryButton.astro";
-
-const storyblokApi = useStoryblokApi();
-// const { data } = await storyblokApi.get("cdn/stories", {
-// 	content_type: "question",
-// 	version: "published",
-// });
-
-const { data } = await storyblokApi.get("cdn/tags", {
-	//content_type: "question",
-	//version: "published",
-});
-
-console.log(data);
 ---
 
 <Html

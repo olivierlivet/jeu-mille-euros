@@ -1,6 +1,4 @@
 ---
-import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-
 import Nav from "../../components/nav.astro";
 import RevealButton from "../../components/RevealButton.astro";
 import { Debug } from "astro/components";
@@ -36,7 +34,6 @@ const data = await queryContents.json();
             name="description"
             content={`Je découvre Astro pour changer de Gatsby`}
         />
-        <!-- <title>{story.content.question}</title> -->
     </head>
     <body class="bg-red-600 min-h-full h-full">
         <Nav />
