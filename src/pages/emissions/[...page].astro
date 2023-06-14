@@ -7,20 +7,11 @@ import Main from "../../layouts/main.astro";
 import { Debug } from "astro/components";
 
 export async function getStaticPaths({ paginate }) {
-    // Load your data with fetch(), Astro.glob(), etc.
     const response = await fetch(`${import.meta.env.BACKEND_URL}/broadcast`);
     const result = await response.json();
-    // const allPokemon = result.results;
 
     // Return a paginated collection of paths for all posts
-    console.log(paginate(result, { pageSize: 10 }));
     return paginate(result, { pageSize: 10 });
-
-    // return [
-    //     { params: { id: "aaaaa" } },
-    //     { params: { id: "2" } },
-    //     { params: { id: "3" } },
-    // ];
 }
 
 const queryContents = await fetch(`${import.meta.env.BACKEND_URL}/broadcast`);
