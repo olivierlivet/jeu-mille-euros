@@ -4,16 +4,19 @@ import RevealButton from "./RevealButton.astro";
 import LevelTag from "./LevelTag.astro";
 import ThemeTag from "./ThemeTag.astro";
 import ExternalLinkIcon from "./ExternalLinkIcon.astro";
+import ShareOnWhatsApp from "../components/Buttons/ShareOnWhatsApp.astro";
+import ShareOnFacebook from "../components/Buttons/ShareOnFacebook.astro";
+import { isRenderTemplateResult } from "astro/dist/runtime/server/render/astro";
 
-const { level, question, answer, theme, id } = Astro.props;
+const { level, title, question, answer, theme, _id } = Astro.props;
 ---
 
 <div
     class="rounded-lg shadow"
     class:list={[
         {
-            "bg-white": level === 1,
-            "bg-blue-500": level === 2,
+            "bg-blue-500": level === 1,
+            "bg-white": level === 2,
             "bg-red-500": level === 3,
             "bg-gray-500": level === 4,
             "bg-gray-800": level === 5,
@@ -24,21 +27,34 @@ const { level, question, answer, theme, id } = Astro.props;
         x-data="{ open: false }"
         class="hover:translate-x-2 transition-transform p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
     >
-        <!-- <Debug data={question} /> -->
+        <!-- <Debug data={theme} /> -->
 
-        <div class="flex justify-between mb-2">
-            <div class="grid gap-2 grid-cols-2">
-                <LevelTag level={level} />
-                {theme ? <ThemeTag theme={theme} /> : null}
+        <div class="grid grid-cols-1 gap-3">
+            <div class="flex justify-between">
+                <div class="grid gap-2 grid-cols-1">
+                    <div class="flex gap-2">
+                        <LevelTag level={level} />
+                        {theme ? <ThemeTag theme={theme} /> : null}
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <ShareOnWhatsApp path={`/questions/${_id}`} title={title} />
+                    <ShareOnFacebook path={`/questions/${_id}`} title={title} />
+                    <ExternalLinkIcon
+                        href={`/questions/${_id}`}
+                        label={question}
+                    />
+                </div>
             </div>
-            <ExternalLinkIcon href={`/questions/${id}`} label={question} />
+            <h5
+                class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+            >
+                {question}
+            </h5>
+            <!-- <a href={`/questions/${id}`}>Lien</a> -->
+            <div class="flex justify-between">
+                <RevealButton answer={answer} />
+            </div>
         </div>
-        <h5
-            class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
-        >
-            {question}
-        </h5>
-        <!-- <a href={`/questions/${id}`}>Lien</a> -->
-        <RevealButton answer={answer} />
     </div>
 </div>

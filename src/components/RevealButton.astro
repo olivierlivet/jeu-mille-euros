@@ -6,7 +6,28 @@ const { answer } = Astro.props;
 ---
 
 <div x-data="{ open: false }" class="flex">
-    <button x-show="!open" x-on:click="open = !open">Voir la réponse</button>
+    <button
+        class="bg-yellow-100 text-yellow-800 hover:bg-yellow-300 border border-yellow-200 p-1 flex items-center rounded-sm"
+        x-show="!open"
+        x-on:click="open = !open"
+    >
+        <svg
+            class="mr-1"
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 24 24"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+            ><g
+                ><path fill="none" d="M0 0h24v24H0z"></path><path
+                    d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-7v2h2v-2h-2zm2-1.645A3.502 3.502 0 0 0 12 6.5a3.501 3.501 0 0 0-3.433 2.813l1.962.393A1.5 1.5 0 1 1 12 11.5a1 1 0 0 0-1 1V14h2v-.645z"
+                ></path></g
+            ></svg
+        >
+        La réponse
+    </button>
     <!-- <div class="bg-green-100" x-show="open" x-transition>{answer}</div> -->
     <div
         class="bg-green-100 text-green-700 p-1 font-medium rounded-sm underline"

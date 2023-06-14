@@ -10,7 +10,7 @@ import QuestionCard from "../../components/QuestionCard.astro";
 
 export async function getStaticPaths() {
     // Load your data with fetch(), Astro.glob(), etc.
-    const response = await fetch(`${import.meta.env.BACKEND_URL}/questions`);
+    const response = await fetch(`${import.meta.env.BACKEND_URL}/question`);
     const result = await response.json();
 
     return result.map((item) => ({
@@ -22,13 +22,14 @@ export async function getStaticPaths() {
 
 const { id } = Astro.params;
 
-const data = await fetch(`${import.meta.env.BACKEND_URL}/questions/${id}`);
-const body = await data.json();
+const request = await fetch(`${import.meta.env.BACKEND_URL}/question/${id}`);
+const data = await request.json();
 ---
 
 <Html
-    title={body.question}
-    description="Ce jeu populaire et familial sillone la France pour vous faire jouer avec vos connaissances de culture générale."
+    title={data.title}
+    description={data.question}
+    ogImage={`${import.meta.env.BACKEND_URL}/questions/media/${id}`}
 >
     <Main>
         <!-- <h1 class="text-3xl mb-4">{body.question}</h1> -->
@@ -37,10 +38,10 @@ const body = await data.json();
         </div>
         <QuestionCard
             isSingle={true}
-            question={body.question}
-            answer={body.answer}
-            level={body.level}
-            theme={body.theme}
+            question={data.question}
+            answer={data.answer}
+            level={data.level}
+            theme={data.theme}
         />
     </Main>
 </Html>

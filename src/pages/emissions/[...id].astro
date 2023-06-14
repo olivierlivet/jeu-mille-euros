@@ -5,24 +5,48 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import QuestionCard from "../../components/QuestionCard.astro";
 import Layout from "../../layouts/main.astro";
 import Html from "../../layouts/html.astro";
+import CardsList from "../../components/CardsList.astro";
 
 export async function getStaticPaths() {
-    return [{ params: { id: "6480a2015afba9ca477cdca5" } }];
+    // Load your data with fetch(), Astro.glob(), etc.
+    const response = await fetch(`${import.meta.env.BACKEND_URL}/broadcast`);
+    const result = await response.json();
+
+    return result.map((item) => ({
+        params: {
+            id: item._id,
+        },
+    }));
 }
+
 const { id } = Astro.params;
 
-const queryContents = await fetch(
-    `${import.meta.env.BACKEND_URL}/emissions/${id}`
-);
-const data = await queryContents.json();
+const request = await fetch(`${import.meta.env.BACKEND_URL}/broadcast/${id}`);
+const data = await request.json();
 ---
 
-<Html title={"test"} description={"test"}>
+<Html title={data.title} description={data.description}>
     <Layout>
-        <div>emission</div>
         <Debug data={data} />
-        <div class="flex flex-col space-y-8 items-center">
-            test {id}
+        <div>
+            <h1>{data.title} le {data.date}</h1>
+            <p>{data.description}</p>
+            <p>Le {data.date}</p>
         </div>
+
+        <CardsList>
+            {
+                data.questions.map((item) => (
+                    <QuestionCard
+                        _id={item._id}
+                        title={item.title}
+                        question={item.question}
+                        answer={item.answer}
+                        level={item.level}
+                        theme={item.theme}
+                    />
+                ))
+            }
+        </CardsList>
     </Layout>
 </Html>
