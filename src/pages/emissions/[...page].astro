@@ -13,8 +13,6 @@ export async function getStaticPaths({ paginate }) {
     // const allPokemon = result.results;
 
     // Return a paginated collection of paths for all posts
-    console.log("result", result);
-    console.log(paginate(result, { pageSize: 1 }));
     return paginate(result, { pageSize: 10 });
 
     // return [
@@ -34,8 +32,9 @@ const data = await queryContents.json();
 >
     <Main>
         <!-- <Debug data={data} /> -->
-        <CardsList>
+        <!-- <CardsList>
             {data.map((item) => <EmissionCard data={item} />)}
-        </CardsList>
+        </CardsList> -->
+        test
     </Main>
 </Html>
