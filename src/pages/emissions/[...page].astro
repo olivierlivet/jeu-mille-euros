@@ -24,7 +24,6 @@ export async function getStaticPaths({ paginate }) {
 
 const queryContents = await fetch(`${import.meta.env.BACKEND_URL}/broadcast`);
 const data = await queryContents.json();
-console.log(data);
 ---
 
 <Html
