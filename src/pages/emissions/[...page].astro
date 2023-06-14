@@ -13,6 +13,7 @@ export async function getStaticPaths({ paginate }) {
     // const allPokemon = result.results;
 
     // Return a paginated collection of paths for all posts
+    console.log(paginate(result, { pageSize: 10 }));
     return paginate(result, { pageSize: 10 });
 
     // return [
@@ -24,6 +25,7 @@ export async function getStaticPaths({ paginate }) {
 
 const queryContents = await fetch(`${import.meta.env.BACKEND_URL}/broadcast`);
 const data = await queryContents.json();
+const { page } = Astro.props;
 ---
 
 <Html
@@ -32,9 +34,9 @@ const data = await queryContents.json();
 >
     <Main>
         <!-- <Debug data={data} /> -->
-        <!-- <CardsList>
-            {data.map((item) => <EmissionCard data={item} />)}
-        </CardsList> -->
-        test
+        <CardsList>
+            {page.data.map((item) => <EmissionCard data={item} />)}
+        </CardsList>
+        <!-- <Debug data={page} /> -->
     </Main>
 </Html>

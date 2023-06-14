@@ -16,7 +16,7 @@ export async function getStaticPaths({ paginate }) {
     // const allPokemon = result.results;
 
     // Return a paginated collection of paths for all posts
-    return paginate(result, { pageSize: 10 });
+    return paginate(result, { pageSize: 2 });
 
     // return [
     //     { params: { id: "aaaaa" } },
@@ -30,29 +30,32 @@ const { page } = Astro.props;
 
 <Html
     title="Questions de culture générale, les questions du jeu des milles euros"
-    description="Questions multi-thématique de culture générale pour vous mettre au défi aa"
+    description="Questions multi-thématique de culture générale pour vous mettre au défi"
 >
     <Main>
+        <div class="flex justify-end py-2 text-gray-400">
+            Page {page.currentPage} / {page.lastPage}
+        </div>
         <CardsList>
             {
-                page.data.map(
-                    (
-                        item
-                        // <Debug data={item} />
-                    ) => (
-                        <QuestionCard
-                            level={item.level}
-                            question={item.question}
-                            answer={item.answer}
-                            theme={item.theme}
-                            id={item._id}
-                        />
-                    )
-                )
+                page.data.map((item) => (
+                    <QuestionCard
+                        level={item.level}
+                        question={item.question}
+                        answer={item.answer}
+                        theme={item.theme}
+                        id={item._id}
+                    />
+                ))
             }
         </CardsList>
 
-        <!-- <Debug data={page} /> -->
+        <Debug data={page} />
         <!-- <Pagination data={page} /> -->
+        <div class="flex py-3 gap-4">
+            {page.url.prev ? <a href={page.url.prev}>Page précédente</a> : null}
+            {page.url.prev && page.url.next ? <div>•</div> : null}
+            {page.url.next ? <a href={page.url.next}>Page suivante</a> : null}
+        </div>
     </Main>
 </Html>
