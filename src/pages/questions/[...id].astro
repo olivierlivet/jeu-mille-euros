@@ -29,7 +29,7 @@ const data = await request.json();
 <Html
     title={data.title}
     description={data.question}
-    ogImage={`${import.meta.env.BACKEND_URL}/question/media/${id}`}
+    ogImage={`"${import.meta.env.BACKEND_URL}/question/media/${id}"`}
 >
     <Main>
         <!-- <h1 class="text-3xl mb-4">{body.question}</h1> -->
