@@ -34,13 +34,13 @@ const { page } = Astro.props;
                         question={item.question}
                         answer={item.answer}
                         theme={item.theme}
-                        id={item._id}
+                        _id={item._id}
                     />
                 ))
             }
         </CardsList>
 
-        <Debug data={page} />
+        <!-- <Debug data={page} /> -->
         <!-- <Pagination data={page} /> -->
         <div class="flex py-3 gap-4">
             {page.url.prev ? <a href={page.url.prev}>Page précédente</a> : null}
