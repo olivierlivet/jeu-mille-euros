@@ -10,19 +10,9 @@ import Pagination from "../../components/Pagination.astro";
 import CardsList from "../../components/CardsList.astro";
 
 export async function getStaticPaths({ paginate }) {
-    // Load your data with fetch(), Astro.glob(), etc.
     const response = await fetch(`${import.meta.env.BACKEND_URL}/question`);
     const result = await response.json();
-    // const allPokemon = result.results;
-
-    // Return a paginated collection of paths for all posts
     return paginate(result, { pageSize: 2 });
-
-    // return [
-    //     { params: { id: "aaaaa" } },
-    //     { params: { id: "2" } },
-    //     { params: { id: "3" } },
-    // ];
 }
 
 const { page } = Astro.props;
