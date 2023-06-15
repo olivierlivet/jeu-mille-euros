@@ -7,9 +7,9 @@ import react from "@astrojs/react";
 import prefetch from '@astrojs/prefetch';
 // import purgecss from 'astro-purgecss';
 
-
+import robotsTxt from "astro-robots-txt";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [alpinejs(), tailwind({}), react(), prefetch()]
+  integrations: [alpinejs(), tailwind({}), react(), prefetch(), robotsTxt()]
 });

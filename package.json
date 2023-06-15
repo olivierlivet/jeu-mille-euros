@@ -24,6 +24,7 @@
     "astro": "^2.6.4",
     "astro-compress": "^1.1.47",
     "astro-purgecss": "^2.1.0",
+    "astro-robots-txt": "^0.5.0",
     "astro-seo-schema": "^2.1.0",
     "formik": "^2.4.1",
     "react": "^18.2.0",
