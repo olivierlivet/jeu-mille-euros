@@ -11,7 +11,7 @@ export async function getStaticPaths({ paginate }) {
     const result = await response.json();
 
     // Return a paginated collection of paths for all posts
-    return paginate(result, { pageSize: 10 });
+    return paginate(result, { pageSize: 20 });
 }
 
 const { page } = Astro.props;

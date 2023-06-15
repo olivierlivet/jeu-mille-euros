@@ -4,9 +4,11 @@ import tailwind from "@astrojs/tailwind";
 import { loadEnv } from 'vite';
 import compress from "astro-compress";
 import react from "@astrojs/react";
+import prefetch from '@astrojs/prefetch';
+
 
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [alpinejs(), tailwind({}), compress(), react()]
+  integrations: [alpinejs(), tailwind({}), react(), prefetch()]
 });
