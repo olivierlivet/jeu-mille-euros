@@ -30,6 +30,7 @@ const data = await request.json();
     title={data.title}
     description={data.question}
     ogImage={`${import.meta.env.BACKEND_URL}/question/media/${id}`}
+    canonical={`/questions/${id}`}
 >
     <Main>
         <!-- <h1 class="text-3xl mb-4">{body.question}</h1> -->

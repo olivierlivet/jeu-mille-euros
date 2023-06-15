@@ -5,9 +5,10 @@ export interface Props {
     title: string;
     description: string;
     ogImage: string;
+    canonical: string;
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, canonical } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -21,8 +22,16 @@ const { title, description, ogImage } = Astro.props;
         <title>{title}</title>
         <meta name="og:title" content={title} />
         <meta name="og:image" content={`${ogImage}`} />
+        {
+            canonical ? (
+                <link
+                    rel="canonical"
+                    href={`${import.meta.env.DEPLOY_URL}${canonical}`}
+                />
+            ) : null
+        }
+        <slot />
     </head>
-    <slot />
 
 
 </html>

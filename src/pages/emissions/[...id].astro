@@ -25,7 +25,11 @@ const request = await fetch(`${import.meta.env.BACKEND_URL}/broadcast/${id}`);
 const data = await request.json();
 ---
 
-<Html title={data.title} description={data.description}>
+<Html
+    title={data.title}
+    description={data.description}
+    canonical={`/emissions/${id}`}
+>
     <Layout>
         <!-- <Debug data={data} /> -->
         <div>
