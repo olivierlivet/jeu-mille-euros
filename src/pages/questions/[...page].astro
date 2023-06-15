@@ -2,8 +2,6 @@
 import Html from "../../layouts/html.astro";
 import Main from "../../layouts/main.astro";
 
-import Nav from "../../components/nav.astro";
-import RevealButton from "../../components/RevealButton.astro";
 import { Debug } from "astro/components";
 import QuestionCard from "../../components/QuestionCard.astro";
 import Pagination from "../../components/Pagination.astro";
@@ -19,12 +17,22 @@ const { page } = Astro.props;
 ---
 
 <Html
-    title="Questions de culture générale, les questions du jeu des milles euros"
+    title={`Questions de culture générale, les questions du jeu des milles euros - page ${page.currentPage}`}
     description="Questions multi-thématique de culture générale pour vous mettre au défi"
 >
     <Main>
-        <div class="flex justify-end py-2 text-gray-400">
-            Page {page.currentPage} / {page.lastPage}
+        <h1
+            class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white"
+        >
+            Questions de culture générale
+        </h1>
+        <div class="flex justify-between py-2 text-gray-400">
+            <div>
+                <button>Filter par thème ou niveau</button>
+            </div>
+            <div>
+                Page {page.currentPage} / {page.lastPage}
+            </div>
         </div>
         <CardsList>
             {
