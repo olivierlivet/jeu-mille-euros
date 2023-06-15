@@ -11,5 +11,6 @@ import robotsTxt from "astro-robots-txt";
 
 // https://astro.build/config
 export default defineConfig({
+  site: import.meta.env.URL,
   integrations: [alpinejs(), tailwind({}), react(), prefetch(), robotsTxt()]
 });
