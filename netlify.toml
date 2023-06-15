@@ -1,4 +1,4 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-' *.netlify.app/ 'unsafe-eval'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' sha256- *.netlify.app/ 'unsafe-eval'"
