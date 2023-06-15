@@ -4,6 +4,7 @@ const { href, label } = Astro.props;
 
 <a
     href={href}
+    rel="prefetch"
     class="bg-slate-100 hover:bg-slate-800 hover:text-white p-2 rounded"
     aria-label={`Lien vers la question ${label}`}
 >
