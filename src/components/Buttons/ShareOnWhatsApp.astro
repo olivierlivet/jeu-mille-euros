@@ -4,7 +4,7 @@ const { path, title, question } = Astro.props;
 
 <a
     href={`whatsapp://send?text=Une question de culture générale : ${title} ${
-        import.meta.env.DEPLOY_URL
+        import.meta.env.URL
     }${path}`}
     data-action="share/whatsapp/share"
     aria-label="Partager sur WhatsApp"
