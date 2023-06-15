@@ -31,6 +31,23 @@ const data = await request.json();
     description={data.question}
     ogImage={`${import.meta.env.BACKEND_URL}/question/media/${id}`}
     canonical={`/questions/${id}`}
+    questionSchema={{
+        "@context": "https://schema.org",
+        "@type": "QAPage",
+        mainEntity: {
+            "@type": "Question",
+            name: data.title,
+            text: data.question,
+            answerCount: 1,
+            upvoteCount: 26,
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: data.answer,
+                upvoteCount: 1234,
+                url: `${import.meta.env.BACKEND_URL}/question/${id}`,
+            },
+        },
+    }}
 >
     <Main>
         <!-- <h1 class="text-3xl mb-4">{body.question}</h1> -->

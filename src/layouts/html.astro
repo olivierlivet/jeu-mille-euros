@@ -1,14 +1,15 @@
 ---
-// import Nav from "../components/nav.astro";
+import { Schema } from "astro-seo-schema";
 
 export interface Props {
     title: string;
     description: string;
     ogImage: string;
     canonical: string;
+    questionSchema: object;
 }
 
-const { title, description, ogImage, canonical } = Astro.props;
+const { title, description, ogImage, canonical, questionSchema } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -30,6 +31,8 @@ const { title, description, ogImage, canonical } = Astro.props;
                 />
             ) : null
         }
+        {questionSchema ? <Schema item={questionSchema} /> : null}
+
         <slot />
     </head>
 
