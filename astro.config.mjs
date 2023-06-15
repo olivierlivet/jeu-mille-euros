@@ -9,9 +9,11 @@ import prefetch from '@astrojs/prefetch';
 
 import robotsTxt from "astro-robots-txt";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
   // site: import.meta.env.URL,
   site: `https://jeu1000euros.fr`,
-  integrations: [alpinejs(), tailwind({}), react(), prefetch(), robotsTxt()]
+  integrations: [alpinejs(), tailwind({}), react(), prefetch(), robotsTxt(), sitemap()]
 });
