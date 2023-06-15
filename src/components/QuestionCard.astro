@@ -37,13 +37,17 @@ const { level, title, question, answer, theme, _id } = Astro.props;
                         {theme ? <ThemeTag theme={theme} /> : null}
                     </div>
                 </div>
-                <div class="grid grid-cols-3 gap-2">
+                <div class="flex justify-end gap-2">
                     <ShareOnWhatsApp path={`/questions/${_id}`} title={title} />
                     <ShareOnFacebook path={`/questions/${_id}`} title={title} />
-                    <ExternalLinkIcon
-                        href={`/questions/${_id}`}
-                        label={question}
-                    />
+                    {
+                        _id ? (
+                            <ExternalLinkIcon
+                                href={`/questions/${_id}`}
+                                label={question}
+                            />
+                        ) : null
+                    }
                 </div>
             </div>
             <h5
