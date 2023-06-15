@@ -3,7 +3,9 @@ const { path, title, question } = Astro.props;
 ---
 
 <a
-    href={`whatsapp://send?text=Une question de culture générale : ${title} https://jeu-mille-euros.fr${path}`}
+    href={`whatsapp://send?text=Une question de culture générale : ${title} ${
+        import.meta.env.DEPLOY_URL
+    }${path}`}
     data-action="share/whatsapp/share"
     aria-label="Partager sur WhatsApp"
     class="bg-slate-100 hover:bg-green-700 hover:text-white p-2 rounded"

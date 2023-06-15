@@ -4,7 +4,7 @@ const { path, title } = Astro.props;
 
 <a
     href={`http://www.facebook.com/sharer.php?u=${
-        import.meta.env.PUBLIC_URL
+        import.meta.env.DEPLOY_URL
     }${path}`}
     aria-label="Partager sur Facebook"
     target="_blank"
