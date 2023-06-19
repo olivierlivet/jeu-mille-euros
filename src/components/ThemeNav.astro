@@ -29,9 +29,7 @@ const { data } = Astro.props;
         {
             data.map((item) => (
                 <a
-                    href={`${
-                        import.meta.env.PUBLIC_URL
-                    }/questions/theme/${item}`}
+                    href={`${import.meta.env.URL}/questions/theme/${item}`}
                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
                     {item}
