@@ -1,4 +1,5 @@
 ---
+const { spacing } = Astro.params;
 ---
 
-<div class="grid columns-1 gap-5 md-0"><slot /></div>
+<div class={`grid columns-1 gap-${spacing} md-0`}><slot /></div>

@@ -12,7 +12,7 @@ const { _id, place, title, date, description } = data;
 ---
 
 <div
-    class="rounded-lg shadow text-black"
+    class="text-black border-b"
     class:list={[
         {
             "bg-gray-300": true,
@@ -21,15 +21,19 @@ const { _id, place, title, date, description } = data;
 >
     <div
         x-data="{ open: false }"
-        class="hover:translate-x-2 transition-transform p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        class="hover:translate-x-2 bg-white transition-transform p-6"
     >
         <!-- <Debug data={question} /> -->
 
         <div class="flex justify-between mb-2">
             <div class="grid gap-2 grid-cols-2">
-                <div class="flex">
-                    <LevelTag level={place} />
-                </div>
+                <h5
+                    class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+                >
+                    <a href={`/emissions/${_id}`}>
+                        {title} le {date}
+                    </a>
+                </h5>
             </div>
             <div class="grid grid-cols-3 gap-2">
                 <ShareOnWhatsApp path={`/emissions/${_id}`} title={title} />
@@ -37,13 +41,7 @@ const { _id, place, title, date, description } = data;
                 <ExternalLinkIcon href={`/emissions/${_id}`} label={title} />
             </div>
         </div>
-        <h5
-            class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
-        >
-            <a href={`/emissions/${_id}`}>
-                {title} le {date}
-            </a>
-        </h5>
+
         <p>
             {description}
         </p>

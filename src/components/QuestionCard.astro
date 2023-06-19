@@ -12,7 +12,7 @@ const { level, title, question, answer, theme, _id } = Astro.props;
 ---
 
 <div
-    class="rounded-lg shadow"
+    class="border-b"
     class:list={[
         {
             "bg-blue-500": level === 1,
@@ -25,7 +25,7 @@ const { level, title, question, answer, theme, _id } = Astro.props;
 >
     <div
         x-data="{ open: false }"
-        class="hover:translate-x-2 transition-transform p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+        class="hover:translate-x-2 transition-transform p-6 bg-white dark:bg-gray-800 dark:border-gray-700"
     >
         <!-- <Debug data={theme} /> -->
 
@@ -50,11 +50,11 @@ const { level, title, question, answer, theme, _id } = Astro.props;
                     }
                 </div>
             </div>
-            <h5
+            <h3
                 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
             >
                 {question}
-            </h5>
+            </h3>
             <!-- <a href={`/questions/${id}`}>Lien</a> -->
             <div class="flex justify-between">
                 <RevealButton answer={answer} />
